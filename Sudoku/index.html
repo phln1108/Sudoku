@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sudoku</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <script type="text/javascript" src="script.js"></script>
+    <header>
+        <div>
+            <img class="sudoku" src="img/letters/color/s.png">
+            <img class="sudoku" src="img/letters/color/u.png">
+            <img class="sudoku" src="img/letters/color/d.png">
+            <img class="sudoku" src="img/letters/color/o.png">
+            <img class="sudoku" src="img/letters/color/k.png">
+            <img class="sudoku" src="img/letters/color/u.png">
+    </header>
+
+    <div id='interface_vida'>
+        <img id='start' onclick="select_dificult()" src='img/start.png'>
+        <img class='vidas' id='vida3' src='img/heart.png'>
+        <img class='vidas' id='vida2' src='img/heart.png'>
+        <img class='vidas' id='vida1' src='img/heart.png'>
+
+    </div>
+    <div id="interface_jogo">
+        <div id="interface_final">
+            
+        </div>
+        <div id="dificulty">
+            <ul id="interface_dificulty">
+                <div class="buttons_dificulty" id="easy" onmouseenter="hover(['easy_a','easy_e','easy_s','easy_y'])" 
+                        onmouseleave="notHover(['easy_a','easy_e','easy_s','easy_y'])" onclick="start(38)">
+                    <img id="easy_e" class="letters_dificulty" src="img/letters/blank/e.png">
+                    <img id="easy_a" class="letters_dificulty" src="img/letters/blank/a.png">
+                    <img id="easy_s" class="letters_dificulty" src="img/letters/blank/s.png">
+                    <img id="easy_y" class="letters_dificulty" src="img/letters/blank/y.png">
+                </div>
+                <div class="buttons_dificulty" id="medium" onmouseenter="hover(['medium_m','medium_e','medium_d','medium_i','medium_u','medium_m2'])" 
+                        onmouseleave="notHover(['medium_m','medium_e','medium_d','medium_i','medium_u','medium_m2'])" onclick="start(30)">
+                    <img id="medium_m" class="letters_dificulty" src="img/letters/blank/m.png">
+                    <img id="medium_e" class="letters_dificulty" src="img/letters/blank/e.png">
+                    <img id="medium_d" class="letters_dificulty" src="img/letters/blank/d.png">
+                    <img id="medium_i" class="letters_dificulty" src="img/letters/blank/i.png">
+                    <img id="medium_u" class="letters_dificulty" src="img/letters/blank/u.png">
+                    <img id="medium_m2" class="letters_dificulty" src="img/letters/blank/m.png">
+                </div>
+                <div class="buttons_dificulty" id="medium" onmouseenter="hover(['hard_h','hard_a','hard_r','hard_d'])" 
+                        onmouseleave="notHover(['hard_h','hard_a','hard_r','hard_d'])" onclick="start(24)">
+                    <img id="hard_h" class="letters_dificulty" src="img/letters/blank/h.png">
+                    <img id="hard_a" class="letters_dificulty" src="img/letters/blank/a.png">
+                    <img id="hard_r" class="letters_dificulty" src="img/letters/blank/r.png">
+                    <img id="hard_d" class="letters_dificulty" src="img/letters/blank/d.png">
+                </div>
+            </ul>
+        </div>
+        <div id="grupo_blocos">
+            <div class="blocos">
+                <div class="celulas" id="cell00" onclick="select_cell('cell00')">
+                    <div class='cell_img' id='cell_img00'>
+                        <img class='img' id='img00' src='img/num/blank.png'>
+
+                    </div>
+                    <div class="cell_aux" id="aux00">
+                        <img class='img_aux' id='img00-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img00-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img00-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img00-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img00-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img00-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img00-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img00-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img00-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell01" onclick="select_cell('cell01')">
+                    <div class='cell_img' id='cell_img01'>
+                        <img class='img' id='img01' src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux01">
+                        <img class='img_aux' id='img01-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img01-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img01-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img01-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img01-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img01-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img01-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img01-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img01-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell02" onclick="select_cell('cell02')">
+                    <div class='cell_img' id='cell_img02'>
+                        <img class='img' id='img02' src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux02">
+                        <img class='img_aux' id='img02-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img02-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img02-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img02-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img02-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img02-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img02-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img02-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img02-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell10" onclick="select_cell('cell10')">
+                    <div class='cell_img' id='cell_img10'>
+                        <img class='img' id='img10' src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux10">
+                        <img class='img_aux' id='img10-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img10-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img10-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img10-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img10-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img10-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img10-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img10-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img10-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell11" onclick="select_cell('cell11')">
+                    <div class='cell_img' id='cell_img11'>
+                        <img class='img' id='img11' src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux11">
+                        <img class='img_aux' id='img11-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img11-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img11-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img11-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img11-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img11-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img11-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img11-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img11-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell12" onclick="select_cell('cell12')">
+                    <div class='cell_img' id='cell_img12'>
+                        <img class='img' id='img12' src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux12">
+                        <img class='img_aux' id='img12-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img12-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img12-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img12-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img12-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img12-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img12-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img12-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img12-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell20" onclick="select_cell('cell20')">
+                    <div class='cell_img' id='cell_img20'>
+                        <img class='img' id='img20' src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux20">
+                        <img class='img_aux' id='img20-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img20-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img20-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img20-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img20-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img20-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img20-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img20-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img20-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell21" onclick="select_cell('cell21')">
+                    <div class='cell_img' id='cell_img21'>
+                        <img class='img' id='img21' src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux21">
+                        <img class='img_aux' id='img21-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img21-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img21-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img21-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img21-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img21-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img21-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img21-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img21-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell22" onclick="select_cell('cell22')">
+                    <div class='cell_img' id='cell_img22'>
+                        <img class='img' id='img22' src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux22">
+                        <img class='img_aux' id='img22-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img22-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img22-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img22-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img22-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img22-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img22-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img22-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img22-9' src="img/num/blank.png">
+                    </div>
+                </div>
+            </div>
+            <div class="blocos">
+                <div class="celulas" id="cell03" onclick="select_cell('cell03')">
+                    <div class='cell_img' id='cell_img03'>
+                        <img class='img' id='img03'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux03">
+                        <img class='img_aux' id='img03-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img03-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img03-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img03-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img03-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img03-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img03-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img03-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img03-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell04" onclick="select_cell('cell04')">
+                    <div class='cell_img' id='cell_img04'>
+                        <img class='img' id='img04'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux04">
+                        <img class='img_aux' id='img04-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img04-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img04-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img04-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img04-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img04-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img04-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img04-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img04-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell05" onclick="select_cell('cell05')">
+                    <div class='cell_img' id='cell_img05'>
+                        <img class='img' id='img05'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux05">
+                        <img class='img_aux' id='img05-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img05-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img05-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img05-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img05-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img05-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img05-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img05-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img05-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell13" onclick="select_cell('cell13')">
+                    <div class='cell_img' id='cell_img13'>
+                        <img class='img' id='img13'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux13">
+                        <img class='img_aux' id='img13-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img13-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img13-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img13-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img13-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img13-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img13-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img13-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img13-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell14" onclick="select_cell('cell14')">
+                    <div class='cell_img' id='cell_img14'>
+                        <img class='img' id='img14'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux14">
+                        <img class='img_aux' id='img14-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img14-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img14-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img14-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img14-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img14-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img14-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img14-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img14-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell15" onclick="select_cell('cell15')">
+                    <div class='cell_img' id='cell_img15'>
+                        <img class='img' id='img15'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux15">
+                        <img class='img_aux' id='img15-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img15-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img15-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img15-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img15-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img15-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img15-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img15-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img15-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell23" onclick="select_cell('cell23')">
+                    <div class='cell_img' id='cell_img23'>
+                        <img class='img' id='img23'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux23">
+                        <img class='img_aux' id='img23-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img23-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img23-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img23-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img23-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img23-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img23-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img23-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img23-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell24" onclick="select_cell('cell24')">
+                    <div class='cell_img' id='cell_img24'>
+                        <img class='img' id='img24'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux24">
+                        <img class='img_aux' id='img24-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img24-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img24-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img24-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img24-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img24-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img24-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img24-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img24-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell25" onclick="select_cell('cell25')">
+                    <div class='cell_img' id='cell_img25'>
+                        <img class='img' id='img25'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux25">
+                        <img class='img_aux' id='img25-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img25-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img25-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img25-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img25-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img25-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img25-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img25-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img25-9' src="img/num/blank.png">
+                    </div>
+                </div>
+            </div>
+            <div class="blocos">
+                <div class="celulas" id="cell06" onclick="select_cell('cell06')">
+                    <div class='cell_img' id='cell_img06'>
+                        <img class='img' id='img06'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux06">
+                        <img class='img_aux' id='img06-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img06-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img06-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img06-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img06-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img06-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img06-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img06-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img06-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell07" onclick="select_cell('cell07')">
+                    <div class='cell_img' id='cell_img07'>
+                        <img class='img' id='img07'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux07">
+                        <img class='img_aux' id='img07-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img07-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img07-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img07-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img07-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img07-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img07-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img07-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img07-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell08" onclick="select_cell('cell08')">
+                    <div class='cell_img' id='cell_img08'>
+                        <img class='img' id='img08'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux08">
+                        <img class='img_aux' id='img08-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img08-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img08-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img08-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img08-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img08-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img08-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img08-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img08-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell16" onclick="select_cell('cell16')">
+                    <div class='cell_img' id='cell_img16'>
+                        <img class='img' id='img16'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux16">
+                        <img class='img_aux' id='img16-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img16-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img16-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img16-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img16-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img16-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img16-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img16-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img16-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell17" onclick="select_cell('cell17')">
+                    <div class='cell_img' id='cell_img17'>
+                        <img class='img' id='img17'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux17">
+                        <img class='img_aux' id='img17-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img17-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img17-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img17-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img17-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img17-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img17-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img17-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img17-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell18" onclick="select_cell('cell18')">
+                    <div class='cell_img' id='cell_img18'>
+                        <img class='img' id='img18'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux18">
+                        <img class='img_aux' id='img18-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img18-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img18-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img18-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img18-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img18-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img18-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img18-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img18-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell26" onclick="select_cell('cell26')">
+                    <div class='cell_img' id='cell_img26'>
+                        <img class='img' id='img26'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux26">
+                        <img class='img_aux' id='img26-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img26-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img26-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img26-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img26-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img26-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img26-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img26-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img26-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell27" onclick="select_cell('cell27')">
+                    <div class='cell_img' id='cell_img27'>
+                        <img class='img' id='img27'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux27">
+                        <img class='img_aux' id='img27-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img27-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img27-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img27-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img27-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img27-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img27-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img27-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img27-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell28" onclick="select_cell('cell28')">
+                    <div class='cell_img' id='cell_img28'>
+                        <img class='img' id='img28'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux28">
+                        <img class='img_aux' id='img28-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img28-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img28-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img28-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img28-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img28-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img28-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img28-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img28-9' src="img/num/blank.png">
+                    </div>
+                </div>
+            </div>
+            <div class="blocos">
+                <div class="celulas" id="cell30" onclick="select_cell('cell30')">
+                    <div class='cell_img' id='cell_img30'>
+                        <img class='img' id='img30'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux30">
+                        <img class='img_aux' id='img30-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img30-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img30-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img30-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img30-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img30-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img30-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img30-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img30-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell31" onclick="select_cell('cell31')">
+                    <div class='cell_img' id='cell_img31'>
+                        <img class='img' id='img31'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux31">
+                        <img class='img_aux' id='img31-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img31-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img31-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img31-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img31-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img31-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img31-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img31-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img31-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell32" onclick="select_cell('cell32')">
+                    <div class='cell_img' id='cell_img32'>
+                        <img class='img' id='img32'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux32">
+                        <img class='img_aux' id='img32-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img32-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img32-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img32-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img32-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img32-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img32-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img32-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img32-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell40" onclick="select_cell('cell40')">
+                    <div class='cell_img' id='cell_img40'>
+                        <img class='img' id='img40'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux40">
+                        <img class='img_aux' id='img40-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img40-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img40-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img40-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img40-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img40-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img40-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img40-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img40-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell41" onclick="select_cell('cell41')">
+                    <div class='cell_img' id='cell_img41'>
+                        <img class='img' id='img41'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux41">
+                        <img class='img_aux' id='img41-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img41-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img41-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img41-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img41-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img41-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img41-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img41-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img41-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell42" onclick="select_cell('cell42')">
+                    <div class='cell_img' id='cell_img42'>
+                        <img class='img' id='img42'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux42">
+                        <img class='img_aux' id='img42-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img42-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img42-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img42-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img42-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img42-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img42-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img42-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img42-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell50" onclick="select_cell('cell50')">
+                    <div class='cell_img' id='cell_img50'>
+                        <img class='img' id='img50'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux50">
+                        <img class='img_aux' id='img50-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img50-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img50-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img50-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img50-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img50-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img50-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img50-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img50-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell51" onclick="select_cell('cell51')">
+                    <div class='cell_img' id='cell_img51'>
+                        <img class='img' id='img51'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux51">
+                        <img class='img_aux' id='img51-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img51-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img51-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img51-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img51-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img51-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img51-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img51-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img51-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell52" onclick="select_cell('cell52')">
+                    <div class='cell_img' id='cell_img52'>
+                        <img class='img' id='img52'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux52">
+                        <img class='img_aux' id='img52-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img52-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img52-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img52-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img52-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img52-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img52-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img52-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img52-9' src="img/num/blank.png">
+                    </div>
+                </div>
+            </div>
+            <div class="blocos">
+                <div class="celulas" id="cell33" onclick="select_cell('cell33')">
+                    <div class='cell_img' id='cell_img33'>
+                        <img class='img' id='img33'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux33">
+                        <img class='img_aux' id='img33-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img33-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img33-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img33-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img33-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img33-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img33-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img33-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img33-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell34" onclick="select_cell('cell34')">
+                    <div class='cell_img' id='cell_img34'>
+                        <img class='img' id='img34'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux34">
+                        <img class='img_aux' id='img34-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img34-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img34-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img34-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img34-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img34-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img34-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img34-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img34-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell35" onclick="select_cell('cell35')">
+                    <div class='cell_img' id='cell_img35'>
+                        <img class='img' id='img35'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux35">
+                        <img class='img_aux' id='img35-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img35-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img35-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img35-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img35-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img35-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img35-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img35-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img35-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell43" onclick="select_cell('cell43')">
+                    <div class='cell_img' id='cell_img43'>
+                        <img class='img' id='img43'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux43">
+                        <img class='img_aux' id='img43-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img43-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img43-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img43-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img43-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img43-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img43-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img43-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img43-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell44" onclick="select_cell('cell44')">
+                    <div class='cell_img' id='cell_img44'>
+                        <img class='img' id='img44'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux44">
+                        <img class='img_aux' id='img44-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img44-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img44-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img44-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img44-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img44-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img44-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img44-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img44-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell45" onclick="select_cell('cell45')">
+                    <div class='cell_img' id='cell_img45'>
+                        <img class='img' id='img45'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux45">
+                        <img class='img_aux' id='img45-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img45-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img45-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img45-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img45-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img45-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img45-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img45-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img45-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell53" onclick="select_cell('cell53')">
+                    <div class='cell_img' id='cell_img53'>
+                        <img class='img' id='img53'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux53">
+                        <img class='img_aux' id='img53-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img53-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img53-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img53-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img53-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img53-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img53-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img53-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img53-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell54" onclick="select_cell('cell54')">
+                    <div class='cell_img' id='cell_img54'>
+                        <img class='img' id='img54'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux54">
+                        <img class='img_aux' id='img54-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img54-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img54-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img54-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img54-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img54-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img54-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img54-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img54-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell55" onclick="select_cell('cell55')">
+                    <div class='cell_img' id='cell_img55'>
+                        <img class='img' id='img55'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux55">
+                        <img class='img_aux' id='img55-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img55-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img55-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img55-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img55-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img55-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img55-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img55-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img55-9' src="img/num/blank.png">
+                    </div>
+                </div>
+            </div>
+            <div class="blocos">
+                <div class="celulas" id="cell36" onclick="select_cell('cell36')">
+                    <div class='cell_img' id='cell_img36'>
+                        <img class='img' id='img36'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux36">
+                        <img class='img_aux' id='img36-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img36-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img36-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img36-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img36-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img36-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img36-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img36-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img36-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell37" onclick="select_cell('cell37')">
+                    <div class='cell_img' id='cell_img37'>
+                        <img class='img' id='img37'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux37">
+                        <img class='img_aux' id='img37-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img37-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img37-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img37-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img37-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img37-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img37-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img37-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img37-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell38" onclick="select_cell('cell38')">
+                    <div class='cell_img' id='cell_img38'>
+                        <img class='img' id='img38'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux38">
+                        <img class='img_aux' id='img38-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img38-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img38-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img38-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img38-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img38-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img38-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img38-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img38-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell46" onclick="select_cell('cell46')">
+                    <div class='cell_img' id='cell_img46'>
+                        <img class='img' id='img46'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux46">
+                        <img class='img_aux' id='img46-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img46-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img46-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img46-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img46-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img46-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img46-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img46-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img46-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell47" onclick="select_cell('cell47')">
+                    <div class='cell_img' id='cell_img47'>
+                        <img class='img' id='img47'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux47">
+                        <img class='img_aux' id='img47-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img47-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img47-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img47-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img47-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img47-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img47-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img47-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img47-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell48" onclick="select_cell('cell48')">
+                    <div class='cell_img' id='cell_img48'>
+                        <img class='img' id='img48'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux48">
+                        <img class='img_aux' id='img48-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img48-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img48-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img48-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img48-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img48-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img48-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img48-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img48-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell56" onclick="select_cell('cell56')">
+                    <div class='cell_img' id='cell_img56'>
+                        <img class='img' id='img56'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux56">
+                        <img class='img_aux' id='img56-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img56-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img56-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img56-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img56-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img56-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img56-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img56-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img56-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell57" onclick="select_cell('cell57')">
+                    <div class='cell_img' id='cell_img57'>
+                        <img class='img' id='img57'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux57">
+                        <img class='img_aux' id='img57-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img57-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img57-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img57-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img57-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img57-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img57-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img57-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img57-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell58" onclick="select_cell('cell58')">
+                    <div class='cell_img' id='cell_img58'>
+                        <img class='img' id='img58'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux58">
+                        <img class='img_aux' id='img58-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img58-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img58-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img58-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img58-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img58-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img58-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img58-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img58-9' src="img/num/blank.png">
+                    </div>
+                </div>
+            </div>
+            <div class="blocos">
+                <div class="celulas" id="cell60" onclick="select_cell('cell60')">
+                    <div class='cell_img' id='cell_img60'>
+                        <img class='img' id='img60'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux60">
+                        <img class='img_aux' id='img60-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img60-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img60-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img60-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img60-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img60-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img60-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img60-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img60-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell61" onclick="select_cell('cell61')">
+                    <div class='cell_img' id='cell_img61'>
+                        <img class='img' id='img61'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux61">
+                        <img class='img_aux' id='img61-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img61-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img61-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img61-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img61-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img61-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img61-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img61-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img61-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell62" onclick="select_cell('cell62')">
+                    <div class='cell_img' id='cell_img62'>
+                        <img class='img' id='img62'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux62">
+                        <img class='img_aux' id='img62-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img62-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img62-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img62-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img62-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img62-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img62-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img62-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img62-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell70" onclick="select_cell('cell70')">
+                    <div class='cell_img' id='cell_img70'>
+                        <img class='img' id='img70'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux70">
+                        <img class='img_aux' id='img70-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img70-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img70-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img70-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img70-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img70-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img70-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img70-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img70-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell71" onclick="select_cell('cell71')">
+                    <div class='cell_img' id='cell_img71'>
+                        <img class='img' id='img71'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux71">
+                        <img class='img_aux' id='img71-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img71-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img71-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img71-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img71-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img71-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img71-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img71-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img71-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell72" onclick="select_cell('cell72')">
+                    <div class='cell_img' id='cell_img72'>
+                        <img class='img' id='img72'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux72">
+                        <img class='img_aux' id='img72-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img72-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img72-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img72-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img72-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img72-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img72-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img72-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img72-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell80" onclick="select_cell('cell80')">
+                    <div class='cell_img' id='cell_img80'>
+                        <img class='img' id='img80'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux80">
+                        <img class='img_aux' id='img80-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img80-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img80-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img80-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img80-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img80-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img80-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img80-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img80-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell81" onclick="select_cell('cell81')">
+                    <div class='cell_img' id='cell_img81'>
+                        <img class='img' id='img81'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux81">
+                        <img class='img_aux' id='img81-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img81-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img81-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img81-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img81-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img81-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img81-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img81-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img81-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell82" onclick="select_cell('cell82')">
+                    <div class='cell_img' id='cell_img82'>
+                        <img class='img' id='img82'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux82">
+                        <img class='img_aux' id='img82-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img82-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img82-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img82-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img82-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img82-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img82-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img82-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img82-9' src="img/num/blank.png">
+                    </div>
+                </div>
+            </div>
+            <div class="blocos">
+                <div class="celulas" id="cell63" onclick="select_cell('cell63')">
+                    <div class='cell_img' id='cell_img63'>
+                        <img class='img' id='img63'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux63">
+                        <img class='img_aux' id='img63-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img63-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img63-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img63-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img63-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img63-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img63-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img63-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img63-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell64" onclick="select_cell('cell64')">
+                    <div class='cell_img' id='cell_img64'>
+                        <img class='img' id='img64'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux64">
+                        <img class='img_aux' id='img64-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img64-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img64-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img64-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img64-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img64-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img64-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img64-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img64-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell65" onclick="select_cell('cell65')">
+                    <div class='cell_img' id='cell_img65'>
+                        <img class='img' id='img65'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux65">
+                        <img class='img_aux' id='img65-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img65-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img65-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img65-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img65-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img65-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img65-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img65-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img65-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell73" onclick="select_cell('cell73')">
+                    <div class='cell_img' id='cell_img73'>
+                        <img class='img' id='img73'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux73">
+                        <img class='img_aux' id='img73-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img73-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img73-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img73-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img73-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img73-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img73-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img73-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img73-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell74" onclick="select_cell('cell74')">
+                    <div class='cell_img' id='cell_img74'>
+                        <img class='img' id='img74'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux74">
+                        <img class='img_aux' id='img74-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img74-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img74-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img74-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img74-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img74-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img74-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img74-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img74-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell75" onclick="select_cell('cell75')">
+                    <div class='cell_img' id='cell_img75'>
+                        <img class='img' id='img75'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux75">
+                        <img class='img_aux' id='img75-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img75-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img75-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img75-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img75-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img75-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img75-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img75-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img75-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell83" onclick="select_cell('cell83')">
+                    <div class='cell_img' id='cell_img83'>
+                        <img class='img' id='img83'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux83">
+                        <img class='img_aux' id='img83-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img83-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img83-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img83-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img83-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img83-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img83-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img83-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img83-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell84" onclick="select_cell('cell84')">
+                    <div class='cell_img' id='cell_img84'>
+                        <img class='img' id='img84'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux84">
+                        <img class='img_aux' id='img84-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img84-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img84-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img84-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img84-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img84-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img84-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img84-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img84-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell85" onclick="select_cell('cell85')">
+                    <div class='cell_img' id='cell_img85'>
+                        <img class='img' id='img85'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux85">
+                        <img class='img_aux' id='img85-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img85-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img85-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img85-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img85-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img85-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img85-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img85-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img85-9' src="img/num/blank.png">
+                    </div>
+                </div>
+            </div>
+            <div class="blocos">
+                <div class="celulas" id="cell66" onclick="select_cell('cell66')">
+                    <div class='cell_img' id='cell_img66'>
+                        <img class='img' id='img66'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux66">
+                        <img class='img_aux' id='img66-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img66-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img66-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img66-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img66-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img66-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img66-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img66-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img66-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell67" onclick="select_cell('cell67')">
+                    <div class='cell_img' id='cell_img67'>
+                        <img class='img' id='img67'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux67">
+                        <img class='img_aux' id='img67-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img67-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img67-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img67-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img67-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img67-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img67-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img67-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img67-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell68" onclick="select_cell('cell68')">
+                    <div class='cell_img' id='cell_img68'>
+                        <img class='img' id='img68'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux68">
+                        <img class='img_aux' id='img68-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img68-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img68-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img68-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img68-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img68-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img68-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img68-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img68-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell76" onclick="select_cell('cell76')">
+                    <div class='cell_img' id='cell_img76'>
+                        <img class='img' id='img76'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux76">
+                        <img class='img_aux' id='img76-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img76-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img76-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img76-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img76-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img76-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img76-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img76-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img76-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell77" onclick="select_cell('cell77')">
+                    <div class='cell_img' id='cell_img77'>
+                        <img class='img' id='img77'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux77">
+                        <img class='img_aux' id='img77-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img77-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img77-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img77-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img77-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img77-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img77-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img77-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img77-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell78" onclick="select_cell('cell78')">
+                    <div class='cell_img' id='cell_img78'>
+                        <img class='img' id='img78'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux78">
+                        <img class='img_aux' id='img78-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img78-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img78-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img78-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img78-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img78-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img78-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img78-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img78-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell86" onclick="select_cell('cell86')">
+                    <div class='cell_img' id='cell_img86'>
+                        <img class='img' id='img86'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux86">
+                        <img class='img_aux' id='img86-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img86-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img86-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img86-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img86-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img86-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img86-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img86-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img86-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell87" onclick="select_cell('cell87')">
+                    <div class='cell_img' id='cell_img87'>
+                        <img class='img' id='img87'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux87">
+                        <img class='img_aux' id='img87-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img87-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img87-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img87-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img87-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img87-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img87-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img87-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img87-9' src="img/num/blank.png">
+                    </div>
+                </div>
+                <div class="celulas" id="cell88" onclick="select_cell('cell88')">
+                    <div class='cell_img' id='cell_img88'>
+                        <img class='img' id='img88'src='img/num/blank.png'>
+                    </div>
+                    <div class="cell_aux" id="aux88">
+                        <img class='img_aux' id='img88-1' src="img/num/blank.png">
+                        <img class='img_aux' id='img88-2' src="img/num/blank.png">
+                        <img class='img_aux' id='img88-3' src="img/num/blank.png">
+                        <img class='img_aux' id='img88-4' src="img/num/blank.png">
+                        <img class='img_aux' id='img88-5' src="img/num/blank.png">
+                        <img class='img_aux' id='img88-6' src="img/num/blank.png">
+                        <img class='img_aux' id='img88-7' src="img/num/blank.png">
+                        <img class='img_aux' id='img88-8' src="img/num/blank.png">
+                        <img class='img_aux' id='img88-9' src="img/num/blank.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id='interface_numeros'>
+        <img class='buttons' id="button1" src="img/1.png" onclick='play_number(1)'>
+        <img class='buttons' id="button2" src="img/2.png" onclick='play_number(2)'>
+        <img class='buttons' id="button3" src="img/3.png" onclick='play_number(3)'>
+        <img class='buttons' id="button4" src="img/4.png" onclick='play_number(4)'>
+        <img class='buttons' id="button5" src="img/5.png" onclick='play_number(5)'>
+        <img class='buttons' id="button6" src="img/6.png" onclick='play_number(6)'>
+        <img class='buttons' id="button7" src="img/7.png" onclick='play_number(7)'>
+        <img class='buttons' id="button8" src="img/8.png" onclick='play_number(8)'>
+        <img class='buttons' id="button9" src="img/9.png" onclick='play_number(9)'>
+        <img id="note" src='img/false.png' onclick='toggle_note()'>
+    </div>
+</body>

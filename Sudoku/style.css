@@ -1,0 +1,152 @@
+body{
+    text-align: center;
+    background-color: gray;
+}
+header{
+    text-align: center;
+    height: 60px;
+    background-color: rgba(24, 24, 24, 0.555);
+}
+.sudoku{
+    display: inline-block;
+    height: 40px;
+    margin-top: 10px;
+}
+
+#interface_vida{
+    height: 50px;
+    width: 610px;
+    display: inline-block;
+    margin: 5px auto auto 10px;
+    
+    
+}
+#start{
+    width: 100px;
+    margin-bottom: -23px;
+    margin-right: 50%;
+    transition: 0.4s
+}
+#start:hover{
+    width: 110px ;
+    margin-top: -10px  ;
+    margin-right: 48.5%;
+    transition: 0.4s
+}
+.vidas{
+    height: 100%;
+    margin-right: 10px;
+}
+#interface_jogo{
+    background-color: black;
+    display: block;
+    height: 615px;
+    width: 615px;
+    border: solid 10px black;
+    margin: 5px auto auto;
+}
+#dificulty{
+    background-color: lightgray;
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+    visibility:hidden;
+    
+}
+#interface_dificulty{
+    padding-left: 20%;
+    padding-top: 20%;
+}
+.buttons_dificulty{
+    width: 350px;
+    display: block;
+    padding: 10px 10px;
+    margin-top: 20px;
+    background-color: gray;
+    border-radius: 15px;
+    transition: 0.5s;
+}
+
+.buttons_dificulty:hover{
+    width: 400px;
+    padding: 20px 20px;
+    margin-left: -40px;
+    transition: 0.5s;
+}
+
+.letters_dificulty{
+    width: 50px;
+}
+
+#grupo_blocos{
+    margin-top: -615px;
+    
+}
+
+.blocos{
+    display:block;
+    height: 201px;
+    width: 201px;
+    border: solid 2px;
+    float: left;
+}
+.celulas{
+    background-color: white;
+    display: block;
+    height: 65px;
+    width: 65px;
+    border: solid 1px;
+    float: left;
+    text-align: center;
+    
+}
+.cell_img{
+    display: block;
+    position: absolute;
+    height: 65px;
+    width: 65px;
+    float: left;
+    text-align: center;
+    
+}
+.img{
+    margin-top: 15%;
+    height: 65%;
+}
+.cell_aux{
+    position: relative ;
+    height: 65px;
+    width: 65px;
+    text-align: center;
+    
+    
+}
+.img_aux{
+    height: 15px;
+    width: 15px;
+    margin: 1px 1px 1px 1px;
+    padding-top: 2px ;
+}
+
+#interface_numeros{
+    height: 50px;
+    width: 650px;
+    display: block;
+    margin: 5px auto auto;
+}
+.buttons{
+    height: 100%;
+    margin-right: 10px;
+    border-radius: 50%;
+    transition: 0.8s; 
+}
+.buttons:hover{
+    height: 100%;
+    box-shadow: 2px 2px 10px 2px rgb(255, 0, 0);
+    transition: 0.5s;
+}
+#note{
+    height: 60px;
+    transition: 0.8s;
+}
+
